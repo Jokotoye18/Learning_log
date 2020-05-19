@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% load static %}
+
+{% block img %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content between">
+        <main class="col-md-8 mb-5" role="main">
+            <div class="card border border-dark">
+                <div class="card-body">
+                    <h2>Here is homepage</h2>
+                </div>
+            </div>
+        </main>
+        <aside class="col-md-4 ">
+            <section class=" card border border-dark">
+                <div class="card-body">
+                    <a class="btn btn-dark mx-2" href="{% provider_login_url 'github' %}">Sign Up via Github</a> | 
+                    <a class="btn btn-info mx-2 " href="{% provider_login_url 'google' %}">Sign Up via Google</a>
+                </div>
+            </section>
+        </aside>
+    </div>
+</div>
+{% endblock %}

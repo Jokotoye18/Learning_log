@@ -37,7 +37,29 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.humanize',
+    'crispy_forms',
+    #django allauth
+    'allauth', 
+    'allauth.account', 
+    'allauth.socialaccount', 
+    'imagekit',
+    
+    ##############
+    #'allauth.socialaccount.providers.facebook', 
+    'allauth.socialaccount.providers.github', 
+    'allauth.socialaccount.providers.google',
+    #'allauth.socialaccount.providers.twitter', 
+
+    #local app
+    'logs',
+    'pages',
+    'profiles',
+    
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +76,7 @@ ROOT_URLCONF = 'learning_log.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,6 +101,14 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+SITE_ID = 1
+
+
+AUTHENTICATION_BACKENDS  = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 
 # Password validation
@@ -114,7 +144,39 @@ USE_L10N = True
 USE_TZ = True
 
 
+
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+LOGIN_REDIRECT_URL = 'pages:home'
+ACCOUNT_LOGOUT_REDIRECT = 'page:home' 
+
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_LOGIN_ON_PASSWORD_RESET = False
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_UNIQUE_USERNAME = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_HOST = 'smtp.sendgrid.net' 
+#EMAIL_HOST_USER = 'apikey' 
+#EMAIL_HOST_PASSWORD = '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' 
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
+
+DEFAULT_FROM_EMAIL = 'jokotoyeademola995@gmail.com'

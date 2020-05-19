@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize  %}
+
+{% block content %}
+<div class="container-fluid">
+    <main class="row justify-content-between">
+        <section style="background-image: url({% static 'images/default-header-overlay.png' %});" class="card border border-dark col-md-4 profile-bark">
+            <figure class="card-body">
+                <div class="text-center mb-3">
+                    <img style="max-width: 200px;" class="rounded-circle" src="{{ user.profile.image_thumbnail.url }}" alt="{{ user.username }}">
+                </div>
+                <figcaption class="text-center bg-dark rounded py-2">
+                    <h3 class="text-white">{{ user.username }}</h3>
+                    <small class="text-white">{{ user.email }}</small>
+                </figcaption>
+            </figure>
+        </section>
+        <section class="border border-dark col-md-8">
+            <h1>Am here</h1>
+        </section>
+    </main>
+</div>
+{% endblock %}

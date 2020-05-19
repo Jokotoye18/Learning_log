@@ -1,0 +1,13 @@
+.requiredField,.asteriskField{
+    display: none;
+}
+header{
+    width: 100%;
+    color: black;
+    background-color: rgb(16, 56, 56);
+}
+.profile-back{
+    background-color: teal;
+    background-position: center;
+    background-size: cover;
+}
