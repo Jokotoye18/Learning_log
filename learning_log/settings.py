@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'allauth', 
     'allauth.account', 
     'allauth.socialaccount', 
-    'imagekit',
+
     
     ##############
     #'allauth.socialaccount.providers.facebook', 
@@ -159,18 +159,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-LOGIN_REDIRECT_URL = 'pages:home'
+LOGIN_REDIRECT_URL = 'logs:log_list'
 ACCOUNT_LOGOUT_REDIRECT = 'page:home' 
 
-ACCOUNT_SESSION_REMEMBER = True
-ACCOUNT_LOGIN_ON_PASSWORD_RESET = False
-ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
-ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
-ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_UNIQUE_USERNAME = True
+
+
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE =  True 
+ACCOUNT_UNIQUE_EMAIL = True 
+ACCOUNT_USERNAME_REQUIRED  = True
+ACCOUNT_UNIQUE_USERNAME = True 
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #EMAIL_HOST = 'smtp.sendgrid.net' 
@@ -180,3 +183,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = 'jokotoyeademola995@gmail.com'
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

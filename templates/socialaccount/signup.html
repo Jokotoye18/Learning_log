@@ -8,11 +8,12 @@
 {% block content %}
 <div class="container my-5 ">
   <div class="row justify-content-center">
-      <div class="card">
-          <div class="col-md-8">
+      <div class="col-md-6">
+          <div class="card">
+            <div class="mb-4 card-header text-center">
+              <h1>{% trans "Sign Up" %}</h1>
+            </div>
               <div class="card-body">
-                <h1>{% trans "Sign Up" %}</h1>
-
                 <p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
                 {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
                 

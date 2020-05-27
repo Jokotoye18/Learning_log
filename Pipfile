@@ -10,7 +10,7 @@ pylint = "*"
 django = "*"
 django-allauth = "*"
 django-crispy-forms = "*"
-django-imagekit = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.8"

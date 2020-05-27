@@ -18,7 +18,7 @@
           <form class="signup" id="signup_form" method="post" novalidate action="{% url 'account_signup' %}">
             {% csrf_token %}
             {{ form|crispy }} 
-            <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'profiles:profile' %}" />
+            <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'profiles:profile_update' %}" />
             <button class="btn btn-success" type="submit">{% trans "Sign Up" %} &raquo;</button>
           </form>
         </div>

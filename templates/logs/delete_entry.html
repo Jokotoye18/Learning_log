@@ -15,7 +15,7 @@
                         {% csrf_token %}
                         {{ form|crispy }}
                         <button class="btn btn-danger" type="submit">comfirm delete</button>
-                        <a class="btn btn-secondary" href="{% url 'logs:log_detail' entry.topic.slug entry.topic.pk %}">Go back</a>
+                        <a class="btn btn-secondary" href="{% url 'logs:log_detail' entry.topic.slug entry.topic.pk %}"><i class="fas fa-chevron-circle-left"> cancel</i></a>
                     </form>
                 </div>
             </div>

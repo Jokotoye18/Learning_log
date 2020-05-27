@@ -45,7 +45,6 @@ class Entry(models.Model):
         return self.entry
     
     
-    
     def save(self, *args, **kwargs):
         self.slug = slugify(self.topic)
         return super().save(*args, **kwargs)

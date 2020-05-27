@@ -6,8 +6,8 @@
 <div class="container mt-5" style="line-height: 2.5em;">
     <div class="row justify-content-center">
         <main class="col-md-8" role="main" >
-            <div class="text-center mb-3">
-                <a class="btn btn-info px-4" href="{% url 'logs:new_entry' topic.slug topic.pk %}">Add Entry</a>
+            <div class="text-center mb-5">
+                <a class="btn btn-block btn-info px-4" href="{% url 'logs:new_entry' topic.slug topic.pk %}"><i class="fas fa-plus">Add Entry</i></a>
             </div>
             <div class="card border border-dark">
                 <div class="card-header text-center">
@@ -18,8 +18,8 @@
                     <small class="border border-dark border-left-0 border-right-0 border-top-0 pb-1 ">Date created: {{ entry.date_created|naturaltime }} | Last Updated: {{ entry.last_updated|naturaltime }}</small>
                     <p class="pt-2 lead">{{ entry.entry }}</p>
                     <div class="text-center "> 
-                        <a class="btn btn-outline-secondary " href="{% url 'logs:edit_entry' entry.slug entry.pk %}">Edit</a> | 
-                        <a class="btn btn-danger" href="{% url 'logs:delete_entry' entry.slug entry.pk %}">Delete</a> | 
+                        <a class="btn btn-outline-secondary " href="{% url 'logs:edit_entry' entry.slug entry.pk %}"><i class="far fa-edit"> Edit</i></a> | 
+                        <a class="btn btn-danger" href="{% url 'logs:delete_entry' entry.slug entry.pk %}"><i class="fas fa-trash"> Delete</i></a> | 
                         <a class="btn btn-outline-primary" href="{% url 'logs:log_list' %}">All Entries</a>
                     </div>
                 </div>

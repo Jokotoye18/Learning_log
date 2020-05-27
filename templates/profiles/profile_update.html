@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load humanize  %}
+{% load crispy_forms_tags %}
+
+<style>
+    input[type='file']{
+        display: none;
+    }
+</style>
+
 
 {% block content %}
 <div class="container-fluid">
@@ -8,16 +15,57 @@
         <section style="background-image: url({% static 'images/default-header-overlay.png' %});" class="card border border-dark col-md-4 profile-bark">
             <figure class="card-body">
                 <div class="text-center mb-3">
-                    <img style="max-width: 200px;" class="rounded-circle" src="{{ user.profile.image_thumbnail.url }}" alt="{{ user.username }}">
+                    <img style="max-width: 200px;" class="rounded-circle" src="{{ user.profile.image.url }}" alt="{{ user.username }}">
                 </div>
                 <figcaption class="text-center bg-dark rounded py-2">
                     <h3 class="text-white">{{ user.username }}</h3>
                     <small class="text-white">{{ user.email }}</small>
                 </figcaption>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form3|crispy }}
+                    <button class="btn btn-info">Change profile pics</button>
+                </form>
             </figure>
+            
         </section>
-        <section class="border border-dark col-md-8">
-            <h1>Am here</h1>
+        <section class="border text-white border-dark mt-3 jumbroton col-md-8">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ form1.first_name|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ form1.last_name|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ form1.username|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ form1.email|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ form2.location|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ form2.interest|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        {{ form2.about|as_crispy_field }}
+                    </div>
+                </div>
+                <div class=""> 
+                    {{ form2.image}}
+                </div>
+                <button class="btn btn-info">update profile</button>
+            </form>
         </section>
     </main>
 </div>
