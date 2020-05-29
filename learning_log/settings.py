@@ -183,6 +183,7 @@ ACCOUNT_LOGOUT_REDIRECT = 'page:home'
 
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
+#ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE =  True 
@@ -193,7 +194,7 @@ ACCOUNT_UNIQUE_USERNAME = True
 
 
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_BACKEND = config('EMAIL_BACKEND')
 EMAIL_HOST = config('EMAIL_HOST')
@@ -203,13 +204,13 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
-DEFAULT_FROM_EMAIL = 'jokotoyeademola995@gmail.com'
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 ADMIN  = (
     ('Jokotoye Ademola', 'jokotoyeademomola95@gmail.com'),
 )
 
-MANAGER = ADMIN
+
 
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
