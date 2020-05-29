@@ -1,8 +1,7 @@
 from django.db import models
 from allauth.account.forms import SignupForm 
-from PIL import Image
 from django.contrib.auth import get_user_model
-from allauth.account.signals import user_signed_up, user_logged_out, user_logged_in
+from allauth.account.signals import user_signed_up
 
 
 
@@ -10,7 +9,6 @@ from allauth.account.signals import user_signed_up, user_logged_out, user_logged
 
 class Profile(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="profile_pics", default="index.jpg")
     location = models.CharField(max_length=50, blank=True)
     interest = models.CharField(max_length=240, blank=True)
     about = models.TextField(blank=True)
@@ -19,23 +17,9 @@ class Profile(models.Model):
         return f"{self.user.username} profile"
 
 
-    def save(self):
-        super().save()
-
-        img = Image.open(self.image.path)
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
-        
-
-
-
-
-
 User = get_user_model()
 
 def user_signed_up_receiver(request, user, **kwargs):
     if user_signed_up:
-        Profile.objects.get_or_create(user=user)
+        Profile.objects.create(user=user)
 user_signed_up.connect(user_signed_up_receiver, sender=User)

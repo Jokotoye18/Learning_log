@@ -20,7 +20,7 @@
                     <div class="text-center "> 
                         <a class="btn btn-outline-secondary " href="{% url 'logs:edit_entry' entry.slug entry.pk %}"><i class="far fa-edit"> Edit</i></a> | 
                         <a class="btn btn-danger" href="{% url 'logs:delete_entry' entry.slug entry.pk %}"><i class="fas fa-trash"> Delete</i></a> | 
-                        <a class="btn btn-outline-primary" href="{% url 'logs:log_list' %}">All Entries</a>
+                        <a class="btn btn-outline-primary" href="{% url 'logs:log_list' %}">All Logs</a>
                     </div>
                 </div>
                 {% endfor %}

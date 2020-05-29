@@ -32,30 +32,31 @@
               <a class="nav-link text-dark" href="{% url 'pages:contact' %}">Get in touch</a>
             </li>
             <li class="nav-item navig">
-              <a class="nav-link text-dark" href="{% url 'profiles:profile_update' %}">Profile</a>
+              <a class="nav-link text-dark" href="{% url 'profiles:profile' %}">Profile</a>
             </li>
           </ul>
           <div>
             {% if request.user.is_authenticated %}
             <div class="dropdown">
-            <a class="dropdown-toggle btn btn-secondary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{ request.user }}
+            <a class="dropdown-toggle btn btn-secondary mt-2 mt-lg-0" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"> {{ request.user }}</i>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="{% url 'profiles:profile_update' %}">Profile</a>
+              <a class="dropdown-item" href="{% url 'profiles:profile' %}">Profile</a>
               <a class="dropdown-item" href="{% url 'account_change_password' %}">Change password</a>
+              <a class="dropdown-item" href="{% url 'account_email' %}">Email</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
+              <a class="dropdown-item" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"> Log out</i></a>
             </div>
             </div>
             {% else %}
             <div>
               <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                   <li class="nav-item ">
-                      <a class="nav-link btn btn-outline-info m-2" href="{% url 'account_login' %}">Sign in</a>
+                      <a class="nav-link btn btn-outline-info m-2" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"> Sign in</i></a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link btn btn-secondary m-2" href="{% url 'account_signup' %}">Sign up</a>
+                      <a class="nav-link btn btn-secondary m-2" href="{% url 'account_signup' %}"><i class="fas fa-user-plus"> Sign up</i></a>
                   </li>
               </ul>
             </div>
@@ -70,13 +71,12 @@
   </div>
   {% block content %}
   {% endblock %}
-  <footer class="bg-white mt-5">
-    <div class="row justify-content-between text-center">
-      <div class="col-md-4"><p>Facebook</p></div>
-      <div class="col-md-4"><p>Google</p></div>
-      <div class="col-md-4"><p>Whatsapp</p></div>
-    </div>
-    <div class="text-center">
+  <div class="my-4 text-center">
+    <a style="color: #f4cbb2;" class="btn bg-white mr-2" href="https://github.com/Jokotoye18" target="_blank"><i class="fab fa-github github"> Github</i></a>
+    <a style="color: #008abe;" class="btn bg-white mr-2" href="https://twitter.com/AkinJokotoye" target="_blank"><i class="fab fa-twitter twitter"> Twitter</i></a>
+    <a style="color: #B23121;" class="btn bg-white mr-2" href="{% url 'pages:contact' %}"><i class="fas fa-envelope"> Contact</i></a>
+  </div>
+    <div class="text-center text-white">
       <p>© 2020 | Developed By Ademola_oba</p>
     </div>
   </footer>

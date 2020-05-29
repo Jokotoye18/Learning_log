@@ -10,7 +10,10 @@ pylint = "*"
 django = "*"
 django-allauth = "*"
 django-crispy-forms = "*"
-coverage = "*"
+python-decouple = "*"
+django-debug-toolbar = "*"
+whitenoise = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"

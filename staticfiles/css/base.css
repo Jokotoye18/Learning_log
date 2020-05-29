@@ -1,13 +1,26 @@
-.requiredField,.asteriskField{
+*{
+    border: none;
+}
+#hint_id_username,.asteriskField,#hint_id_username{
     display: none;
 }
+
 header{
     width: 100%;
     color: black;
     background-color: rgb(16, 56, 56);
 }
-.profile-back{
-    background-color: teal;
-    background-position: center;
-    background-size: cover;
+
+.navig:hover{
+    background-color: #c4c4c4;
+    color: black;
+    border-radius: 0.2rem;
+    padding: 0 1rem;
+}
+
+.twitter{
+    color: !important;
+}
+.github{
+    color: !important;
 }

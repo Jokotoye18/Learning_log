@@ -10,8 +10,6 @@ class Topic(models.Model):
     slug = models.SlugField(blank=True, max_length=150)
     date_created = models.DateTimeField(auto_now_add=True)
 
-
-
     class Meta:
         ordering = ['author']
 

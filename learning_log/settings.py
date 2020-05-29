@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from decouple import config
+from decouple import Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,17 +22,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6$5l#8o0!+ld632@mpiano9)2)#makjn+kkg72ke)$u!=48b#1'
+#SECRET_KEY = '6$5l#8o0!+ld632@mpiano9)2)#makjn+kkg72ke)$u!=48b#1'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1', cast=Csv())
+
+ENVIRONMENT = config('ENVIRONMENT', default='production')
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,15 +46,19 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.humanize',
     'crispy_forms',
+
     #django allauth
     'allauth', 
     'allauth.account', 
     'allauth.socialaccount', 
 
-    
+    #third party app
+    'debug_toolbar',
+
+
     ##############
     #'allauth.socialaccount.providers.facebook', 
-    'allauth.socialaccount.providers.github', 
+    #'allauth.socialaccount.providers.github', 
     'allauth.socialaccount.providers.google',
     #'allauth.socialaccount.providers.twitter', 
 
@@ -63,9 +73,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', #Whitenoise
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware', #debug-toolbar
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -103,6 +115,11 @@ DATABASES = {
 }
 
 SITE_ID = 1
+
+#debug-toolbar
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 
 AUTHENTICATION_BACKENDS  = (
@@ -155,6 +172,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -165,24 +183,33 @@ ACCOUNT_LOGOUT_REDIRECT = 'page:home'
 
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
-ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE =  True 
+ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True 
 ACCOUNT_USERNAME_REQUIRED  = True
 ACCOUNT_UNIQUE_USERNAME = True 
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#EMAIL_HOST = 'smtp.sendgrid.net' 
-#EMAIL_HOST_USER = 'apikey' 
-#EMAIL_HOST_PASSWORD = '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' 
-#EMAIL_PORT = 587
-#EMAIL_USE_TLS = True
+
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
 
 DEFAULT_FROM_EMAIL = 'jokotoyeademola995@gmail.com'
+
+ADMIN  = (
+    ('Jokotoye Ademola', 'jokotoyeademomola95@gmail.com'),
+)
+
+MANAGER = ADMIN
 
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
@@ -192,3 +219,24 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+if ENVIRONMENT == 'production':
+    #SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+    CACHE = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache', 
+            'LOCATION': '127.0.0.1:11211',
+        }
+    }
+    
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 3600
+    #SECURE_REFERRER_POLICY = 'same-origin'
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

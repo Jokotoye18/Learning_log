@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<style>
+    input[type='file']{
+        display: none;
+    }
+</style>
+
+
+{% block content %}
+<div class="container">
+    <main class="row justify-content-center">
+        <section class="border text-white border-dark mt-3 col-md-8">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ form1.first_name|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ form1.last_name|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ form1.username|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ form1.email|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        {{ form2.location|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{ form2.interest|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        {{ form2.about|as_crispy_field }}
+                    </div>
+                </div>
+                <button class="btn btn-info">update profile</button>
+            </form>
+        </section>
+    </main>
+</div>
+{% endblock %}
