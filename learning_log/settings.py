@@ -234,7 +234,7 @@ MESSAGE_TAGS = {
 }
 
 if ENVIRONMENT == 'production':
-    SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+    # SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
     CACHE = {
         'default': {
             'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache', 
