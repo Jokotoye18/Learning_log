@@ -10,6 +10,8 @@ class Topic(models.Model):
     slug = models.SlugField(blank=True, max_length=150)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    objects = models.Manager()
+
     class Meta:
         ordering = ['author']
 
@@ -35,6 +37,8 @@ class Entry(models.Model):
     slug = models.SlugField(blank=True, max_length=150)
     date_created = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(null=True, blank=True)
+
+    objects = models.Manager()
 
     class Meta:
         verbose_name_plural = 'Entries'
