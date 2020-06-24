@@ -232,13 +232,16 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 if ENVIRONMENT == 'production':
-    # SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
     CACHE = {
         'default': {
             'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache', 
             'LOCATION': '127.0.0.1:11211',
+            'OPTIONS': {
+                'server_max_value_length': 1024 * 1024 * 2,
+            }
         }
     }
     
@@ -254,7 +257,7 @@ if ENVIRONMENT == 'production':
 
     
     X_FRAME_OPTIONS = 'DENY'
-    #SECURE_REFERRER_POLICY = 'same-origin'
+    SECURE_REFERRER_POLICY = 'same-origin'
     
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SESSION_COOKIE_SECURE = True

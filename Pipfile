@@ -18,6 +18,7 @@ django-heroku = "*"
 sentry-sdk = "*"
 coverage = "*"
 dj-database-url = "*"
+python-memcached = "*"
 
 [requires]
 python_version = "3.8"
