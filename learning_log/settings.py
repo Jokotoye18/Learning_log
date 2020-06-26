@@ -46,16 +46,16 @@ ENVIRONMENT = config('ENVIRONMENT', default='production')
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.humanize',
-    'crispy_forms',
+
 
     #django allauth
     'allauth', 
@@ -63,7 +63,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount', 
 
     #third party app
+    'crispy_forms',
     'debug_toolbar',
+    'sri',
 
 
     ##############
@@ -83,10 +85,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', #Whitenoise
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', #Whitenoise
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware', #cache 
+    'django.middleware.common.CommonMiddleware', 
+    'django.middleware.cache.FetchFromCacheMiddleware',#cache 
     # 'csp.middleware.CSPMiddleware',# django-csp
     'debug_toolbar.middleware.DebugToolbarMiddleware', #debug-toolbar
     'django.contrib.auth.middleware.AuthenticationMiddleware',
