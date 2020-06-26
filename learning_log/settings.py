@@ -254,7 +254,7 @@ if ENVIRONMENT == 'production':
     #HTTP Strict Transport Security (HSTS)
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_SSL_REDIRECT = True
-    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_SECONDS = 15768000
     SECURE_HSTS_PRELOAD = True
 
     #Cross-Site Request Forgery (CSRF)
