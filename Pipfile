@@ -19,6 +19,7 @@ sentry-sdk = "*"
 coverage = "*"
 dj-database-url = "*"
 python-memcached = "*"
+django-csp = "*"
 
 [requires]
 python_version = "3.8"

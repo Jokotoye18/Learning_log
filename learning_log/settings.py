@@ -87,6 +87,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    # 'csp.middleware.CSPMiddleware',# django-csp
     'debug_toolbar.middleware.DebugToolbarMiddleware', #debug-toolbar
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -222,7 +223,12 @@ ADMIN  = (
 
 MANAGER = ADMIN
 
-
+# # Keep our policy as strict as possible
+# CSP_DEFAULT_SRC = ("'none'",)
+# CSP_STYLE_SRC = ("'self'", 'fonts.googleapis.com')
+# CSP_SCRIPT_SRC = ("'self'",)
+# CSP_FONT_SRC = ("'self'", 'fonts.gstatic.com')
+# CSP_IMG_SRC = ("'self'",)
 
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
@@ -257,7 +263,7 @@ if ENVIRONMENT == 'production':
 
     
     X_FRAME_OPTIONS = 'DENY'
-    SECURE_REFERRER_POLICY = 'same-origin'
+    # SECURE_REFERRER_POLICY = 'same-origin'
     
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SESSION_COOKIE_SECURE = True
