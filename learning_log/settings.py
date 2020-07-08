@@ -200,7 +200,7 @@ ACCOUNT_LOGOUT_REDIRECT = 'page:home'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
-ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = False
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE =  True 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True 
@@ -209,20 +209,20 @@ ACCOUNT_UNIQUE_USERNAME = True
 
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-#EMAIL_BACKEND = config('EMAIL_BACKEND')
-#EMAIL_HOST = config('EMAIL_HOST')
-#EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
-#EMAIL_PORT = config('EMAIL_PORT', cast=int)
-#EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-#EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+DEFAULT_FROM_EMAIL = 'Learning log <jokotoyeademola995@gmail.com>'
 
 ADMIN  = (
-    ('Jokotoye Ademola', 'jokotoyeademomola95@gmail.com'),
+    ('Jokotoye Ademola', 'jokotoyeademola995@gmail.com'),
 )
 
 MANAGER = ADMIN
