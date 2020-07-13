@@ -6,7 +6,7 @@ from django.template.defaultfilters import slugify
 
 class Topic(models.Model):
     author = models.ForeignKey(get_user_model(), related_name='topics',on_delete=models.CASCADE)
-    topic = models.CharField(max_length=150)
+    topic = models.CharField(max_length=150, unique=True)
     slug = models.SlugField(blank=True, max_length=150)
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -21,7 +21,7 @@ class Topic(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('logs:log_detail', kwargs={
+        return reverse('logs:log_topic_entries', kwargs={
             'topic_slug': self.slug,
             'topic_pk': self.pk
         } )
